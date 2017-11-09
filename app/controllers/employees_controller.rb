@@ -25,10 +25,11 @@ class EmployeesController < ApplicationController
   # POST /employees.json
   def create
     @employee = Employee.new(employee_params)
+    @employee.company_id = params[:company_id]
 
     respond_to do |format|
       if @employee.save
-        format.html { redirect_to @employee, notice: 'Employee was successfully created.' }
+        format.html { redirect_to company_path, notice: 'Employee was successfully created.' }
         format.json { render :show, status: :created, location: @employee }
       else
         format.html { render :new }
